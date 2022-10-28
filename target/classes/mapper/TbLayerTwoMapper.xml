@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myframework.code.dao.TbLayerTwoMapper">
+  <resultMap id="BaseResultMap" type="com.myframework.code.entity.TbLayerTwo">
+    <constructor>
+      <idArg column="layer_two_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="layer_two_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="layer_two_other_content" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    layer_two_id, layer_two_name, layer_two_other_content
+  </sql>
+  <select id="selectByExample" parameterType="com.myframework.code.entity.TbLayerTwoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_layer_two
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_layer_two
+    where layer_two_id = #{layerTwoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_layer_two
+    where layer_two_id = #{layerTwoId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myframework.code.entity.TbLayerTwoExample">
+    delete from tb_layer_two
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myframework.code.entity.TbLayerTwo">
+    insert into tb_layer_two (layer_two_id, layer_two_name, layer_two_other_content
+      )
+    values (#{layerTwoId,jdbcType=VARCHAR}, #{layerTwoName,jdbcType=VARCHAR}, #{layerTwoOtherContent,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myframework.code.entity.TbLayerTwo">
+    insert into tb_layer_two
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="layerTwoId != null">
+        layer_two_id,
+      </if>
+      <if test="layerTwoName != null">
+        layer_two_name,
+      </if>
+      <if test="layerTwoOtherContent != null">
+        layer_two_other_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="layerTwoId != null">
+        #{layerTwoId,jdbcType=VARCHAR},
+      </if>
+      <if test="layerTwoName != null">
+        #{layerTwoName,jdbcType=VARCHAR},
+      </if>
+      <if test="layerTwoOtherContent != null">
+        #{layerTwoOtherContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myframework.code.entity.TbLayerTwoExample" resultType="java.lang.Long">
+    select count(*) from tb_layer_two
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_layer_two
+    <set>
+      <if test="record.layerTwoId != null">
+        layer_two_id = #{record.layerTwoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.layerTwoName != null">
+        layer_two_name = #{record.layerTwoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.layerTwoOtherContent != null">
+        layer_two_other_content = #{record.layerTwoOtherContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_layer_two
+    set layer_two_id = #{record.layerTwoId,jdbcType=VARCHAR},
+      layer_two_name = #{record.layerTwoName,jdbcType=VARCHAR},
+      layer_two_other_content = #{record.layerTwoOtherContent,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myframework.code.entity.TbLayerTwo">
+    update tb_layer_two
+    <set>
+      <if test="layerTwoName != null">
+        layer_two_name = #{layerTwoName,jdbcType=VARCHAR},
+      </if>
+      <if test="layerTwoOtherContent != null">
+        layer_two_other_content = #{layerTwoOtherContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where layer_two_id = #{layerTwoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myframework.code.entity.TbLayerTwo">
+    update tb_layer_two
+    set layer_two_name = #{layerTwoName,jdbcType=VARCHAR},
+      layer_two_other_content = #{layerTwoOtherContent,jdbcType=VARCHAR}
+    where layer_two_id = #{layerTwoId,jdbcType=VARCHAR}
+  </update>
+</mapper>
