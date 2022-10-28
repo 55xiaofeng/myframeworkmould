@@ -3,7 +3,7 @@ layer_one_id varchar(10) not null,
 layer_one_name varchar(150) not null,
 layer_one_other_content varchar(150),
 primary key (layer_one_id)
-);
+);;
 create table tb_layer_two(
 layer_two_id varchar(10) not null,
 layer_two_name varchar(150) not null,
